@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Faker\Generator;
 
 class Notes extends Model
 {
@@ -13,7 +14,7 @@ class Notes extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['body', 'title'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,4 +39,13 @@ class Notes extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function fake(Generator &$faker)
+    {
+        return [
+            'title' => $faker->words(2, true),
+            'body' => $faker->sentence(6),
+        ];
+    }
+
 }
