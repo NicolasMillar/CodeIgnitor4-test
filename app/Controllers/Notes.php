@@ -22,4 +22,22 @@ class Notes extends ResourceController{
         $note = $this->model->find($id);
         return $this->respondCreated(['message' => 'Registro creado correctamente','data' => $note]);
     }
+
+    public function update($id = null){
+        $form = $this->request->getJSON(true);
+
+        if(empty($form)) {
+            return $this->failValidationErrors('Nada que actualizar');
+        }
+
+        if(!$this->model->find($id)){
+            return $this->failNotFound();
+        }
+
+        if(!$this->model->update($id, $form)){
+            return $this->failValidationErrors($this->model->errors());
+        }
+
+        return $this->respondUpdated(['message' => 'Registro actualizado correctamente', 'data' => $this->model->find($id) ]);
+    }
 }
