@@ -24,8 +24,25 @@ class Notes extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
+    protected $validationRules      = [
+        'title' => [
+            'label' => 'titulo',
+            'rules' => 'required'
+        ],
+        'body' => [
+            'label' => 'cuerpo',
+            'rules' => 'required'
+        ],
+    ];
+    protected $validationMessages   = [
+        'title' => [
+            'required' => 'El campo {field} es requerido'
+        ],
+        'body' => [
+            'required' => 'El campo {field} es requerido'
+        ]
+
+    ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
